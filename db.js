@@ -10,7 +10,7 @@
  * Edit host / user / password below if your MySQL setup differs.
  */
 
-const mysql = require('mysql2/promise');
+const mysql = require("mysql2/promise");
 
 /** Holds the pool after connectDb() finishes — used by controllers and queries.js */
 let pool;
@@ -22,20 +22,20 @@ let pool;
 async function connectDb() {
   // Step 1: connect without picking a database (so we can CREATE DATABASE)
   const connection = await mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '' // TODO: change to your MySQL root password
+    host: "127.0.0.1",
+    user: "root",
+    password: "00000", // TODO: change to your MySQL root password
   });
 
-  await connection.query('CREATE DATABASE IF NOT EXISTS mycvproject');
+  await connection.query("CREATE DATABASE IF NOT EXISTS mycvproject");
   await connection.end();
 
   // Step 2: pool for the lab database — all SQL goes through pool.query()
   pool = mysql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '', // keep in sync with the connection above
-    database: 'mycvproject'
+    host: "127.0.0.1",
+    user: "root",
+    password: "00000", // keep in sync with the connection above
+    database: "mycvproject",
   });
 
   // Parent table: one row per person in the CV form
